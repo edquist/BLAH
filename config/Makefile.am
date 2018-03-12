@@ -1,0 +1,36 @@
+# ****************
+# * BLAHP daemon * 
+# ****************
+#
+# $Id: Makefile.am,v 1.12.4.1 2011/02/07 15:49:47 pandreet Exp $ 
+#
+# File:           Makefile.am
+#
+# Author(s):      Francesco Prelz ($Author: pandreet $)
+#        e-mail: "Francesco.Prelz@mi.infn.it"
+#
+# Revision history:
+#
+# 28-Nov-2005  Created 
+#
+
+wletcwmdir = $(sysconfdir)
+wletcwm_DATA = blah.config.template blparser.conf.template
+
+#install-data-hook:
+#        /bin/cp $(DESTDIR)$(sysconfdir)/blah.config.template $(DESTDIR)$(sysconfdir)/blah.config
+
+
+EXTRA_DIST = blah.config.template \
+             blparser.conf.template \
+             glite-ce-blparser \
+             glite-ce-blahparser \
+             glite-ce-check-blparser 
+
+bldir = $(sysconfdir)/$(initdir)
+bl_SCRIPTS = glite-ce-blparser glite-ce-blahparser glite-ce-check-blparser
+
+CLEANFILES =
+
+MAINTAINERCLEANFILES = Makefile.in *~ *.*~
+
