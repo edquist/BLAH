@@ -1,5 +1,5 @@
 #Supported batch systems
-supported_lrms=pbs,lsf
+supported_lrms=pbs,lsf,sge
 
 #DGAS logfile 
 BLAHPD_ACCOUNTING_INFO_LOG=
@@ -94,6 +94,13 @@ lsf_BLPport1=
 #
 lsf_BLPserver2=
 lsf_BLPport2=
+
+#
+# SGE Configuration
+#
+sge_root=$SGE_ROOT
+sge_cellname=$SGE_CELL
+
 
 #
 #LSF Updater
