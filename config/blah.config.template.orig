@@ -102,12 +102,6 @@ sge_root=$SGE_ROOT
 sge_cellname=$SGE_CELL
 
 
-## SLURM
-
-#path to the slurm executables
-slurm_binpath=`which sbatch 2>/dev/null|sed 's|/[^/]*$||'`
-
-
 #
 #LSF Updater
 #

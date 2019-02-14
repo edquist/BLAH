@@ -176,11 +176,14 @@ BEGIN {
     current_job = ""
     current_wn = ""
     current_js = ""
+    exitcode = "-1"
 }
 
 /Job Id:/ {
     current_job = substr($0, index($0, ":") + 2)
-    current_job = substr(current_job, 1, index(current_job, ".")-1)
+    end = index(current_job, ".")
+    if ( end == 0 ) { end = length(current_job) + 1 }
+    current_job = substr(current_job, 1, end)
     print "[BatchJobId=\"" current_job "\";"
 }
 /exec_host =/ {
@@ -212,6 +215,9 @@ END {
 	}
 	print "JobStatus=" jobstatus ";"
 	if (jobstatus == 4) {
+		if (exitcode == "-1") {
+			exitcode = "0"
+		}
 		print "ExitCode=" exitcode ";"
 	}
 	print "]"
