@@ -78,6 +78,11 @@ int create_accounting_log(int argc, char** argname, char** argvalue)
                 acc_loc = DEFAULT_GLITE_LOCATION;
         }
 
+/* In the Condor build of the blahp, we can find all the libraries we need
+ * via the RUNPATH. Setting LD_LIBRARY_PATH can muck up the command line
+ * tools for the local batch system.
+ */
+#if 0
         acc_needed_libs = make_message("%s/lib:%s/externals/lib:%s/lib:/opt/lcg/lib", acc_loc, acc_loc,
 			                getenv("GLOBUS_LOCATION") ? getenv("GLOBUS_LOCATION") : "/opt/globus");
         acc_old_ld_lib=getenv("LD_LIBRARY_PATH");
@@ -88,6 +93,7 @@ int create_accounting_log(int argc, char** argname, char** argvalue)
                 setenv("LD_LIBRARY_PATH",acc_new_ld_lib,1);
         }else
                  setenv("LD_LIBRARY_PATH",acc_needed_libs,1);
+#endif
 
         blah_config_handle = config_read(NULL);
         if (blah_config_handle == NULL) 

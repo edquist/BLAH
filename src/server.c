@@ -345,6 +345,11 @@ serveConnection(int cli_socket, char* cli_ip_addr)
 		tmp_dir  = DEFAULT_TEMP_DIR;
 	}
 
+/* In the Condor build of the blahp, we can find all the libraries we need
+ * via the RUNPATH. Setting LD_LIBRARY_PATH can muck up the command line
+ * tools for the local batch system.
+ */
+#if 0
 	needed_libs = make_message("%s/lib:%s/externals/lib:%s/lib:/opt/lcg/lib", result, result, getenv("GLOBUS_LOCATION") ? getenv("GLOBUS_LOCATION") : "/opt/globus");
 	old_ld_lib=getenv("LD_LIBRARY_PATH");
 	if(old_ld_lib)
@@ -360,6 +365,7 @@ serveConnection(int cli_socket, char* cli_ip_addr)
 	}
 	else
 	 	 setenv("LD_LIBRARY_PATH",needed_libs,1);
+#endif
 	
 	blah_script_location = strdup(blah_config_handle->bin_path);
 	blah_version = make_message(RCSID_VERSION, VERSION, "poly,new_esc_format");
@@ -2013,11 +2019,17 @@ cmd_send_proxy_to_worker_node(void *args)
 		else
 			proxyFileNameNew = strdup(argv[CMD_SEND_PROXY_TO_WORKER_NODE_ARGS + MEXEC_PARAM_SRCPROXY + 1]);
 
+/* In the Condor build of the blahp, we can find all the libraries we need
+ * via the RUNPATH. GLOBUS_LOCATION is unlikely to be set, and /opt/globus
+ * is very unlikely to contain anything useful.
+ */
+#if 0
 		/* Add the globus library path */
 		ld_path = make_message("LD_LIBRARY_PATH=%s/lib",
 		                           getenv("GLOBUS_LOCATION") ? getenv("GLOBUS_LOCATION") : "/opt/globus");
 		push_env(&exe_command.environment, ld_path);
 		free(ld_path);
+#endif
 
 		delegate_switch = "";
 		if (config_test_boolean(config_get("blah_delegate_renewed_proxies",blah_config_handle)))
