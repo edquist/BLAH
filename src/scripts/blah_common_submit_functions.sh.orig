@@ -272,7 +272,7 @@ function bls_parse_submit_options ()
   ###############################################################
   # Parse parameters
   ###############################################################
-  while getopts "a:i:o:e:c:s:v:V:dw:q:n:N:z:h:S:r:p:l:x:u:j:T:I:O:R:C:D:" arg 
+  while getopts "a:i:o:e:c:s:v:V:dw:q:n:N:z:h:S:r:p:l:x:u:j:T:I:O:R:C:" arg 
   do
       case "$arg" in
       a) bls_opt_xtra_args="$OPTARG" ;;
@@ -302,7 +302,6 @@ function bls_parse_submit_options ()
       O) bls_opt_outputflstring="$OPTARG" ;;
       R) bls_opt_outputflstringremap="$OPTARG" ;;
       C) bls_opt_req_file="$OPTARG";;
-      D) bls_opt_run_dir="$OPTARG";;
       -) break ;;
       ?) echo $usage_string
          exit 1 ;;
@@ -618,15 +617,10 @@ function bls_add_job_wrapper ()
   
   echo "old_home=\`pwd\`">>$bls_tmp_file
   # Set the temporary home (including cd'ing into it)
-  if [ "x$bls_opt_run_dir" != "x" ] ; then
-    run_dir="$bls_opt_run_dir"
-  else
-    run_dir="home_$bls_tmp_name"
-  fi
   if [ -n "$blah_wn_temporary_home_dir" ] ; then
-    echo "new_home=${blah_wn_temporary_home_dir}/$run_dir">>$bls_tmp_file
+    echo "new_home=${blah_wn_temporary_home_dir}/home_$bls_tmp_name">>$bls_tmp_file
   else
-    echo "new_home=\${old_home}/$run_dir">>$bls_tmp_file
+    echo "new_home=\${old_home}/home_$bls_tmp_name">>$bls_tmp_file
   fi
 
   echo "mkdir \$new_home">>$bls_tmp_file
