@@ -1,5 +1,5 @@
 #Supported batch systems
-supported_lrms=pbs,lsf,sge
+supported_lrms=pbs,lsf,sge,condor
 
 #DGAS logfile 
 BLAHPD_ACCOUNTING_INFO_LOG=
