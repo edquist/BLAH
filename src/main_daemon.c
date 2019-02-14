@@ -43,7 +43,10 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <syslog.h>
+
+#ifdef MTRACE_ON
 #include <mcheck.h>
+#endif
 
 #include "blahpd.h"
 #include "server.h"
