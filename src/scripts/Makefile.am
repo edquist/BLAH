@@ -32,7 +32,7 @@
 
 
 bin_SCRIPTS = blah_load_config.sh blah_common_submit_functions.sh \
-  pbs_cancel.sh pbs_status.sh pbs_submit.sh pbs_hold.sh pbs_resume.sh \
+  pbs_cancel.sh pbs_status.sh pbs_submit.sh pbs_hold.sh pbs_resume.sh pbs_status.py \
   lsf_cancel.sh lsf_status.sh lsf_submit.sh lsf_hold.sh lsf_resume.sh \
   condor_cancel.sh condor_status.sh condor_submit.sh condor_hold.sh condor_resume.sh \
   sge_cancel.sh sge_helper sge_resume.sh sge_submit.sh sge_filestaging \
