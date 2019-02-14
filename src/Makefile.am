@@ -50,7 +50,7 @@ blahpd_SOURCES = main.c $(common_sources)
 
 blahpd_daemon_SOURCES = main_daemon.c $(common_sources)
 
-blahpd_LDADD = $(CLASSAD_LIBS)
+blahpd_LDADD = $(CLASSAD_LIBS) $(GLOBUS_GSS_NOTHR_LIBS) $(GLOBUS_SSL_NOTHR_LIBS)
 
 blahpd_daemon_LDADD = $(blahpd_LDADD)
 
