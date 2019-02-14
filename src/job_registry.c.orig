@@ -293,7 +293,7 @@ job_registry_purge(const char *path, time_t oldest_creation_date,
      }
     if (ret == 0) break;
 
-    if (cur.cdate < oldest_creation_date && (cur.status != RUNNING && cur.status != IDLE && cur.status != HELD))
+    if (cur.cdate < oldest_creation_date)
      {
       job_registry_unlink_proxy(jra, &cur);
       continue;
