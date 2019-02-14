@@ -20,7 +20,7 @@
 #
 
 
-[ -f ${GLITE_LOCATION:-/opt/glite}/etc/blah.config ] && . ${GLITE_LOCATION:-/opt/glite}/etc/blah.config
+[ -f ${GLITE_LOCATION:-/opt/glite}/etc/batch_gahp.config ] && . ${GLITE_LOCATION:-/opt/glite}/etc/batch_gahp.config
 
 if [ -z "$sge_rootpath" ]; then sge_rootpath="/usr/local/sge/pro"; fi
 if [ -r "$sge_rootpath/${sge_cellname:-default}/common/settings.sh" ]

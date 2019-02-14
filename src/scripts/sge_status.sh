@@ -20,7 +20,7 @@
 #
 
 
-[ -f ${GLITE_LOCATION:-/opt/glite}/etc/blah.config ] && . ${GLITE_LOCATION:-/opt/glite}/etc/blah.config
+[ -f ${GLITE_LOCATION:-/opt/glite}/etc/batch_gahp.config ] && . ${GLITE_LOCATION:-/opt/glite}/etc/batch_gahp.config
 
 sge_helper_path=${GLITE_LOCATION:-/opt/glite}/bin
 

@@ -15,13 +15,13 @@
 #
 
 wletcwmdir = $(sysconfdir)
-wletcwm_DATA = blah.config.template blparser.conf.template
+wletcwm_DATA = batch_gahp.config.template blparser.conf.template
 
-#install-data-hook:
-#        /bin/cp $(DESTDIR)$(sysconfdir)/blah.config.template $(DESTDIR)$(sysconfdir)/blah.config
+install-data-hook:
+	/bin/cp $(DESTDIR)$(sysconfdir)/batch_gahp.config.template $(DESTDIR)$(sysconfdir)/batch_gahp.config
 
 
-EXTRA_DIST = blah.config.template \
+EXTRA_DIST = batch_gahp.config.template \
              blparser.conf.template \
              glite-ce-blparser \
              glite-ce-blahparser \

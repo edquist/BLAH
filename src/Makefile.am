@@ -41,18 +41,18 @@ else
 GLOBUS_EXECS =
 endif
 
-bin_PROGRAMS = blahpd blahpd_daemon BLClient BLParserLSF BLParserPBS test_condor_logger blah_job_registry_add blah_job_registry_lkup blah_job_registry_scan_by_subject BUpdaterCondor BNotifier BUpdaterLSF BUpdaterPBS BUpdaterSGE $(GLOBUS_EXECS)  blparser_master blah_check_config blah_job_registry_dump
+bin_PROGRAMS = batch_gahp batch_gahp_daemon BLClient BLParserLSF BLParserPBS test_condor_logger blah_job_registry_add blah_job_registry_lkup blah_job_registry_scan_by_subject BUpdaterCondor BNotifier BUpdaterLSF BUpdaterPBS BUpdaterSGE $(GLOBUS_EXECS)  blparser_master blah_check_config blah_job_registry_dump
 noinst_PROGRAMS = test_job_registry_create test_job_registry_purge test_job_registry_update test_job_registry_access
 
 common_sources = console.c job_status.c resbuffer.c server.c commands.c classad_binary_op_unwind.C classad_c_helper.C proxy_hashcontainer.c config.c job_registry.c blah_utils.c env_helper.c mapped_exec.c md5.c 
 
-blahpd_SOURCES = main.c $(common_sources)
+batch_gahp_SOURCES = main.c $(common_sources)
 
-blahpd_daemon_SOURCES = main_daemon.c $(common_sources)
+batch_gahp_daemon_SOURCES = main_daemon.c $(common_sources)
 
-blahpd_LDADD = $(CLASSAD_LIBS) $(GLOBUS_GSS_NOTHR_LIBS) $(GLOBUS_SSL_NOTHR_LIBS)
+batch_gahp_LDADD = $(CLASSAD_LIBS) $(GLOBUS_GSS_NOTHR_LIBS) $(GLOBUS_SSL_NOTHR_LIBS)
 
-blahpd_daemon_LDADD = $(blahpd_LDADD)
+batch_gahp_daemon_LDADD = $(batch_gahp_LDADD)
 
 BPRclient_SOURCES = BPRclient.c BPRcomm.c tokens.c
 
