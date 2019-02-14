@@ -3538,10 +3538,12 @@ char*  outputfileRemaps(char *sb,char *sbrmp)
 #define CONVARG_OPENING_LEN    2
 #define CONVARG_CLOSING        "\"'\000"
 #define CONVARG_CLOSING_LEN    3
-#define CONVARG_QUOTSEP        "\\\"%c\\\""
-#define CONVARG_QUOTSEP_LEN    5
-#define CONVARG_DBLQUOTESC     "\\\\\\\""
-#define CONVARG_DBLQUOTESC_LEN 4
+#define CONVARG_QUOTSEP        "\"%c\""
+#define CONVARG_QUOTSEP_LEN    3
+#define CONVARG_DBLQUOTESC     "\\\""
+#define CONVARG_DBLQUOTESC_LEN 2
+#define CONVARG_SNGLQUOTESC   "'\"'\"'"
+#define CONVARG_SNGLQUOTESC_LEN 5
 
 char*
 ConvertArgs(char* original, char separator)
@@ -3579,7 +3581,9 @@ ConvertArgs(char* original, char separator)
 		{	/* a quote inside quotes... */
 			if ((i+1) < orig_len && original[i+1] == SINGLE_QUOTE_CHAR) 
 			{	/* the quote is a literal, copy and skip */
-				result[j++] = original[i++];
+				memcpy(result + j, CONVARG_SNGLQUOTESC, CONVARG_SNGLQUOTESC_LEN);
+				j += CONVARG_SNGLQUOTESC_LEN;
+				i++;
 			}
 			else
 			{	/* the quote is a closing quote */
@@ -3596,6 +3600,9 @@ ConvertArgs(char* original, char separator)
 			{	/* the blank is a separator */
 				memcpy(result + j, quoted_sep, CONVARG_QUOTSEP_LEN);
 				j += CONVARG_QUOTSEP_LEN;
+				while ( original[i+1] == ' ' ) {
+					i++;
+				}
 			}
 		}
 		else if (original[i] == DOUBLE_QUOTE_CHAR)
