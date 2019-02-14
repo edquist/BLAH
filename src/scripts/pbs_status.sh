@@ -169,7 +169,9 @@ for  reqfull in $pars ; do
 
         staterr=/tmp/${reqjob}_staterr
 	
-result=`${pbs_binpath}/qstat -f $reqjob 2>$staterr | awk -v jobId=$reqjob '
+result=`${pbs_binpath}/qstat -f $reqjob 2>$staterr`
+qstat_exit_code=$?
+result=`echo "$result" | awk -v jobId=$reqjob '
 BEGIN {
     current_job = ""
     current_wn = ""
@@ -220,7 +222,12 @@ END {
         errout=`cat $staterr`
 	rm -f $staterr 2>/dev/null
 	
-        if [ -z "$errout" ] ; then
+        if [ "$qstat_exit_code" -eq "153" ] ; then
+                # If the job has disappeared, assume it's completed
+                # (same as globus)
+                echo "0[BatchJobId=\"$reqjob\";JobStatus=4;ExitCode=0]"
+                retcode=0
+        elif [ -z "$errout" ] ; then
                 echo "0"$result
                 retcode=0
         else
