@@ -120,7 +120,7 @@ bnotifier_pidfile=/var/tmp/cream_tomcat_bnotifier.pid
 condor_binpath=/opt/condor-c/bin
 
 #Registry file location
-job_registry=/var/tmp/cream_tomcat_registry.db
+job_registry=
 #Set the following variable to 'yes' to have multiple BLAHPD instances
 #share the job registry -index- via mmap:
 job_registry_use_mmap=no
